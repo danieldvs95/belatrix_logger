@@ -7,5 +7,5 @@ Here is the tech test with some new refactors added.
     create table log_values(
       message text NOT NULL,
       type int NOT NULL,
-      created_at timestamp default now()
+      created_at timestamp NOT NULL default now()
     );
