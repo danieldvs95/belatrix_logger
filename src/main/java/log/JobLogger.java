@@ -33,23 +33,19 @@ public class JobLogger {
         removeLoggerHandlers();
     }
 
-    public static void logMessage(String messageText, MessageType type) {
+    public static void logMessage(String messageText, MessageType type) throws Exception {
 
         if (messageText == null || messageText.length() == 0) {
             return;
         }
         messageText.trim();
 
-        try {
-            validateLogConfig(type);
-            handleFileLog();
-            handleConsoleLog();
-            logger.log(Level.INFO, type.name() + " - " + messageText);
-            handleDatabaseLog(messageText, type);
-            removeLoggerHandlers();
-        } catch (Exception e) {
-            logger.log(Level.SEVERE, e.getMessage());
-        }
+        validateLogConfig(type);
+        handleFileLog();
+        handleConsoleLog();
+        logger.log(Level.INFO, type.name() + " - " + messageText);
+        handleDatabaseLog(messageText, type);
+        removeLoggerHandlers();
     }
 
     private static void validateLogConfig(MessageType type) throws Exception {
